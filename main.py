@@ -14,13 +14,15 @@ TEXT = (
     "in handwriting I knew as my own, one line: ask her about the "
     "winter we never had. I have never borrowed this book."
 )
+ENTRY_TEXT = TEXT
 
 
 def main() -> None:
-    text = TEXT
+    text = ENTRY_TEXT
     count = len(text)  # Unicode code points
     assert 1 <= count <= 280, f"entry is {count} code points"
     assert text.strip(), "entry must not be only whitespace"
+    assert "\n" not in text, "entry must be a single paragraph"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(text)
